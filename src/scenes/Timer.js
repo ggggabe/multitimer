@@ -112,7 +112,7 @@ const TimerEditor = () => {
 }
 
 const TimerDisplay = props => {
-  const { state: {running, displayTime: [ hr, min, sec ]}, dispatch } = useContext(TimerContext)
+  const { state: {expired, running, displayTime: [ hr, min, sec ]}, dispatch } = useContext(TimerContext)
   const [timer, setTimer] = useState()
 
   useEffect(() => {
@@ -138,7 +138,7 @@ const TimerDisplay = props => {
     flexFlow: 'row',
     justifyContent: 'center'
   }}>
-    <h2>{hr}<span>:</span>{min}<span>:</span>{sec}</h2>
+    <h2>{expired ? '-' : ''}{hr}<span>:</span>{min}<span>:</span>{sec}</h2>
   </div>
 }
 
@@ -158,7 +158,7 @@ export const TimerCard = (props) => {
 
     <TimerDisplay></TimerDisplay>
 
-    {editable && <TimerEditor />}
+    {!running && editable && <TimerEditor />}
     <div style={{
       display: 'flex',
       justifyContent: 'space-between'
@@ -171,7 +171,7 @@ export const TimerCard = (props) => {
         </Button>
       }
       {
-        !running && <TimerButton label='start' action='start'/>
+        !running && !editable && <TimerButton label='start' action='start'/>
       }
 
       {

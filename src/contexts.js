@@ -59,22 +59,25 @@ export const TimerContextProvider = (props) => {
 
     switch (type) {
       case 'run':
-        const elapsed = acc.elapsed + 1
+        const expired = acc.expired + 1
+
         return {
           ...acc,
-          displayTime: secondsToDisplayTime(acc.duration - elapsed),
-          elapsed
+          displayTime: secondsToDisplayTime( expired < acc.duration ? acc.duration - expired : expired - acc.duration ),
+          negative: expired > acc.duration,
+          expired
         }
       case 'start':
         return {
           ...acc,
-          elapsed: 0,
+          expired: 0,
+          negative: false,
           running: true
         }
       case 'stop':
         return {
           ...acc,
-          elapsed: 0,
+          expired: 0,
           displayTime: secondsToDisplayTime(acc.duration),
           running: false
         }
@@ -82,6 +85,7 @@ export const TimerContextProvider = (props) => {
         return {
           ...acc,
           seconds: 0,
+          negative: false,
           running: false
         }
       case 'set duration':
