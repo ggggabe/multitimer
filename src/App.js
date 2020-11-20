@@ -7,7 +7,7 @@ function App() {
 
   return <MultiTimerContextProvider {...defaultMultiTimerContext}>
     <MultiTimerScene />
-</MultiTimerContextProvider>
+  </MultiTimerContextProvider>
 }
 
 export default App;

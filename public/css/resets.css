@@ -1,0 +1,45 @@
+/* * * * * * * * * * * * * *
+ *
+ * PATH: public/resets.css
+ *
+ * * * * * * * * * * * * * */
+
+* {
+  background: #12030b;
+  color: #fffefc;
+  font-size: 20px;
+}
+
+::selection {
+  background: #333;
+  color: #ff3366;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  min-height: 100vh;
+}
+
+#root {
+  flex: 1;
+  max-width: 100%;
+}
+
+ul, ul li {
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  list-style-type: none;
+}
+
+p, h1, h2, h3, h4, h5, h6, a {
+  margin: 0;
+  padding: 0;
+  line-height:1.2em;
+}
+
+a {
+  text-decoration: underline;
+}

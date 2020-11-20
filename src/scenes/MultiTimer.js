@@ -21,10 +21,7 @@ export const MultiTimerScene = (props) => {
 
   const { timers } = state
 
-  return <div style={{
-    display: 'flex',
-    flexWrap: 'wrap',
-  }}>
+  return <div style={{ display: 'flex', flexWrap: 'wrap' }}>
     {
       timers.map(
         (timer, key) => (
@@ -36,11 +33,10 @@ export const MultiTimerScene = (props) => {
     }
 
     <Card style={{
-      justifyContent: 'flex-end',
-      alignItems: 'flex-end'
+      justifyContent: 'center',
+      alignItems: 'center'
     }}>
-      <Button style={{
-      }} onClick={
+      <Button onClick={
         e => {
           e.preventDefault()
           dispatch({
@@ -54,5 +50,6 @@ export const MultiTimerScene = (props) => {
         new timer
       </Button>
     </Card>
+
   </div>
 }

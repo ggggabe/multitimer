@@ -6,6 +6,8 @@ import {
 import {
   Button,
   Card,
+  Header,
+  Editable,
   InputGroup,
 } from '../components'
 
@@ -111,7 +113,7 @@ const TimerEditor = () => {
   )
 }
 
-const TimerDisplay = props => {
+const TimerClock = props => {
   const { state: {expired, running, displayTime: [ hr, min, sec ]}, dispatch } = useContext(TimerContext)
   const [timer, setTimer] = useState()
 
@@ -142,23 +144,15 @@ const TimerDisplay = props => {
   </div>
 }
 
-export const TimerCard = (props) => {
-  const { state } = useContext(TimerContext)
-  const { running, name } = state
+const TimerButtons = props => {
   const [editable, setEditable] = useState(false)
 
-  return <Card>
-    <div style={{
-      display: 'flex',
-      flexFlow: 'row',
-      width: '100%'
-    }}>
-      <h1> {name} </h1>
-    </div>
+  const { state } = useContext(TimerContext)
+  const { running } = state
 
-    <TimerDisplay></TimerDisplay>
-
+  return <>
     {!running && editable && <TimerEditor />}
+
     <div style={{
       display: 'flex',
       justifyContent: 'space-between'
@@ -170,6 +164,7 @@ export const TimerCard = (props) => {
           {editable ? 'done' : 'edit'}
         </Button>
       }
+
       {
         !running && !editable && <TimerButton label='start' action='start'/>
       }
@@ -181,7 +176,29 @@ export const TimerCard = (props) => {
         </>
       }
     </div>
+  </>
+}
 
+export const TimerCard = (props) => {
+  const { state: { name }, dispatch  } = useContext(TimerContext)
+
+  return <Card>
+    <Header>
+      <Editable value={name} onEdit={(newVal) => {
+        dispatch({
+          type: 'set name',
+          payload: {
+            name: newVal
+          }
+        })
+      }}>
+        <h2>{name}</h2>
+      </Editable>
+    </Header>
+
+    <TimerClock />
+
+    <TimerButtons />
   </Card>
 }
 

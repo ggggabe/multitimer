@@ -1,0 +1,40 @@
+/* * * * * * * * * * * * * *
+ *
+ * PATH: public/fonts.css
+ *
+ * * * * * * * * * * * * * */
+
+@font-face {
+  font-family: 'Bagnard';
+  src: local('Bagnard'), url(fonts/Bagnard.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'Junicode Bold';
+  src: local('Junicode Bold'), url(fonts/junicode-1/Junicode-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Junicode';
+  src: local('Junicode'), url(fonts/junicode-1/Junicode.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Junicode Italic';
+  src: local('Junicode Italic'), url(fonts/junicode-1/Junicode-Italic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Junicode Bold Italic';
+  src: local('Junicode Bold Italic'), url(fonts/junicode-1/Junicode-BoldItalic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'M+ MN Type-1 Thin';
+  src: local('M+ MN Type-1 Thin'), url(fonts/mplus/mplus-1mn-thin-sub.woff) format('woff');
+}
+
+@font-face {
+  font-family: 'M+ MN Type-1 Regular';
+  src: local('M+ MN Type-1 Regular'), url(fonts/mplus/mplus-1mn-regular-sub.woff) format('woff');
+}

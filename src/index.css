@@ -1,3 +1,18 @@
 body {
   margin: 0;
+  background-color: var(--bg-color);
+}
+
+.card, .card * {
+  color: var(--color);
+  background-color: var(--fg-color);
+}
+
+.card {
+  padding: 8px;
+}
+
+.card .header h2 {
+  font-size: 1em;
+  font-family: 'M+ MN Type-1 Thin';
 }
