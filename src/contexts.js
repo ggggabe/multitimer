@@ -2,6 +2,7 @@ import React, {
   createContext,
   useReducer
 } from 'react'
+import { TIMER_NAME } from './defaults'
 
 const SECONDS_IN_HOUR = 3600
 const SECONDS_IN_MINUTE = 60
@@ -24,7 +25,7 @@ function displayTimeToSeconds([hr, min, sec]) {
 export const TimerContext = createContext({
   state: {
     duration: 360,
-    name: "Default Timer",
+    name: "",
     displayTime: secondsToDisplayTime(360)
   }
 })
@@ -33,15 +34,15 @@ export const MultiTimerContext = createContext({
   state: {
     timers: [{
       duration: 149,
-      name: "Default Timer",
+      name: "",
       displayTime: secondsToDisplayTime(149)
     }, {
       duration: 90000,
-      name: "Default Timer 2",
+      name: "",
       displayTime: secondsToDisplayTime(90000)
     }, {
       duration: 30,
-      name: "Default Timer 3",
+      name: "",
       displayTime: secondsToDisplayTime(30)
     }]
   }
@@ -106,13 +107,13 @@ export const TimerContextProvider = (props) => {
       case 'set name':
         return {
           ...acc,
-          name: payload.name
+          name: payload.name.length ? payload.name : TIMER_NAME
         }
       default:
         return acc
     }
   }, {
-    name,
+    name: name.length ? name : TIMER_NAME,
     duration,
     displayTime
   })
