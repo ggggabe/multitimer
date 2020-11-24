@@ -77,8 +77,9 @@ export const Editable = (props) => {
 
   const [editable, setEditable] = useState(false)
   const [editedValue, setCurrentEditedValue] = useState(value)
+
   const exit = useCallback(() => {
-    onEdit(editedValue)
+    editedValue && onEdit(editedValue)
     setEditable(false)
   }, [onEdit, setEditable, editedValue])
 
@@ -106,11 +107,11 @@ export const Editable = (props) => {
         editable ? (
           <InputGroup>
             <label>Name </label>
-            <input ref={ref} value={editedValue} type='text' onChange={e => {
+            <input ref={ref} placeholder={value} value={editedValue} type='text' onChange={e => {
               e.preventDefault()
               setCurrentEditedValue(e.target.value)
             }} />
-            <Button onClick={() => { exit() } }>
+            <Button onClick={exit}>
               <code>Done</code>
             </Button>
           </InputGroup>
