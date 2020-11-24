@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 
 
 /*
@@ -53,7 +53,6 @@ export const InputGroup = (props) => {
 
 
 const EXIT_EDIT_KEY_CODES = [13, 27]
-
 // PROP TYPE INFO
 //
 // props = {
@@ -78,27 +77,28 @@ export const Editable = (props) => {
 
   const [editable, setEditable] = useState(false)
   const [editedValue, setCurrentEditedValue] = useState(value)
-
-  const exit = useMemo(() => e => {
-    if (!EXIT_EDIT_KEY_CODES.filter( k => k === e.keyCode ).length ) return
-
-    e.preventDefault()
+  const exit = useCallback(() => {
     onEdit(editedValue)
     setEditable(false)
+  }, [onEdit, setEditable, editedValue])
 
-  }, [onEdit, editedValue])
+  const handleExitHotKeys = useMemo(() => e => {
+    if (!EXIT_EDIT_KEY_CODES.filter( k => k === e.keyCode ).length ) return
+    e.preventDefault()
+    exit()
+  }, [exit])
 
   useEffect(() => {
     if (!editable) return () => {}
 
     const inputElement = ref.current
 
-    inputElement && inputElement.addEventListener('keypress', exit)
+    inputElement && inputElement.addEventListener('keypress', handleExitHotKeys)
 
     return () => {
-      inputElement && inputElement.removeEventListener('keypress', exit)
+      inputElement && inputElement.removeEventListener('keypress', handleExitHotKeys)
     }
-  }, [editable, exit, ref])
+  }, [editable, handleExitHotKeys, ref])
 
   return (
     <div style={{ cursor: 'pointer' }} onClick={() => editable || setEditable(true)}>
@@ -110,6 +110,9 @@ export const Editable = (props) => {
               e.preventDefault()
               setCurrentEditedValue(e.target.value)
             }} />
+            <Button onClick={() => { exit() } }>
+              <code>Done</code>
+            </Button>
           </InputGroup>
         )
         : children
