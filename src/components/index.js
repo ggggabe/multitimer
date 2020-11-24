@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 
 
 /*
@@ -77,16 +77,16 @@ export const Editable = (props) => {
 
   const [editable, setEditable] = useState(false)
   const [editedValue, setCurrentEditedValue] = useState(value)
-  const exit = () => {
+  const exit = useCallback(() => {
     onEdit(editedValue)
     setEditable(false)
-  }
+  }, [onEdit, setEditable, editedValue])
 
   const handleExitHotKeys = useMemo(() => e => {
     if (!EXIT_EDIT_KEY_CODES.filter( k => k === e.keyCode ).length ) return
     e.preventDefault()
     exit()
-  }, [onEdit, editedValue])
+  }, [exit])
 
   useEffect(() => {
     if (!editable) return () => {}
