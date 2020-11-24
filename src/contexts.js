@@ -10,7 +10,10 @@ const SECONDS_IN_MINUTE = 60
 function makeTwoDigits(num) {
   return `${Math.floor(num/10)}${num%10}`
 }
+
 function secondsToDisplayTime(seconds) {
+  seconds = seconds || 0
+
   return [
     Math.floor( (seconds / SECONDS_IN_HOUR )),                     // Hrs
     Math.floor( (seconds / SECONDS_IN_MINUTE) % 60 ),    // Minutes
@@ -19,7 +22,7 @@ function secondsToDisplayTime(seconds) {
 }
 
 function displayTimeToSeconds([hr, min, sec]) {
-  return (parseInt(hr) * SECONDS_IN_HOUR) + (parseInt(min) * SECONDS_IN_MINUTE) + parseInt(sec)
+  return (parseInt(hr || 0) * SECONDS_IN_HOUR) + (parseInt(min || 0) * SECONDS_IN_MINUTE) + parseInt(sec || 0)
 }
 
 export const TimerContext = createContext({
